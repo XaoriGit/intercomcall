@@ -1,8 +1,14 @@
 package ru.xaori.intercomcall.data
 
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
-import ru.xaori.intercomcall.data.repository.SipManager
+import org.pjsip.pjsua2.Endpoint
+import ru.xaori.intercomcall.data.repository.CallController
+import ru.xaori.intercomcall.data.service.fcm.CallActionReceiver
 
 val dataModule = module {
-    single { SipManager() }
+
+    singleOf(::CallController)
+
+    singleOf(::Endpoint)
 }
