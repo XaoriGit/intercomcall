@@ -24,3 +24,6 @@ build/
 
 # Misc
 *.log
+
+
+app/google-services.json

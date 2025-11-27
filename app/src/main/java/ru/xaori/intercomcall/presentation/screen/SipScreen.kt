@@ -23,12 +23,6 @@ fun SipScreen(vm: SipViewModel = koinViewModel()) {
     var target by remember { mutableStateOf("") }
 
     Column(modifier = Modifier.padding(16.dp)) {
-        Text("SIP Call App", style = MaterialTheme.typography.titleLarge)
-        Spacer(Modifier.height(16.dp))
-        TextField(value = target, onValueChange = { target = it }, label = { Text("Target SIP URI") })
-        Spacer(Modifier.height(8.dp))
-        Button(onClick = { vm.call(target) }) { Text("Call") }
-        Spacer(Modifier.height(8.dp))
         Text("State: ${vm.callState}")
     }
 }
