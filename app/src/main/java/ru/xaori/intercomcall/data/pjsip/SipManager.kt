@@ -1,12 +1,9 @@
 package ru.xaori.intercomcall.data.pjsip
 
 import android.content.Context
-import android.os.Bundle
 import android.util.Log
-import com.google.android.gms.tasks.Tasks.call
 import org.pjsip.pjsua2.AccountConfig
 import org.pjsip.pjsua2.AuthCredInfo
-import org.pjsip.pjsua2.Call
 import org.pjsip.pjsua2.CallOpParam
 import org.pjsip.pjsua2.CallSendDtmfParam
 import org.pjsip.pjsua2.Endpoint

@@ -7,9 +7,7 @@ import org.pjsip.pjsua2.Endpoint
 import org.pjsip.pjsua2.OnCallMediaStateParam
 import org.pjsip.pjsua2.OnCallStateParam
 import org.pjsip.pjsua2.pjmedia_type
-import org.pjsip.pjsua2.pjsip_inv_state
 import org.pjsip.pjsua2.pjsua_call_media_status
-import org.pjsip.pjsua2.pjsua_state
 
 class MyCall(private val endpoint: Endpoint, acc: Account, callId: Int = -1) : Call(acc, callId) {
 

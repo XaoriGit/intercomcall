@@ -13,7 +13,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import ru.xaori.intercomcall.presentation.screen.call.CallScreen
 import ru.xaori.intercomcall.presentation.theme.IntercomcallTheme
-import kotlin.jvm.java
 
 class IncomingCallActivity : ComponentActivity() {
 
