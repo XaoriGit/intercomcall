@@ -53,7 +53,6 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center
                     ) {
                         Text("Пустота пока что")
-                        // тут был экран
                     }
                 }
             }

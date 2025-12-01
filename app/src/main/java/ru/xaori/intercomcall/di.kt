@@ -7,5 +7,4 @@ import ru.xaori.intercomcall.presentation.presentationModule
 val commonModule = module {
     includes(dataModule)
     includes(presentationModule)
-
 }
