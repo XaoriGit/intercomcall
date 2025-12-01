@@ -17,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.core.app.ActivityCompat
 import com.google.firebase.messaging.FirebaseMessaging
-import ru.xaori.intercomcall.presentation.screen.SipScreen
 import ru.xaori.intercomcall.presentation.theme.IntercomcallTheme
 
 class MainActivity : ComponentActivity() {

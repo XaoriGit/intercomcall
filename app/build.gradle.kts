@@ -1,4 +1,7 @@
+import com.android.build.gradle.ProguardFiles.getDefaultProguardFile
+import org.gradle.kotlin.dsl.android
 import org.gradle.kotlin.dsl.implementation
+import org.gradle.kotlin.dsl.libs
 
 plugins {
     alias(libs.plugins.android.application)
