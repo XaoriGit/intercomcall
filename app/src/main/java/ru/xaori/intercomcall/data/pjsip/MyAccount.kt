@@ -1,24 +1,29 @@
 package ru.xaori.intercomcall.data.pjsip
 
-import android.content.Context
 import android.util.Log
 import org.pjsip.pjsua2.Account
+import org.pjsip.pjsua2.AccountConfig
 import org.pjsip.pjsua2.Endpoint
 import org.pjsip.pjsua2.OnIncomingCallParam
-import ru.xaori.intercomcall.data.repository.CallController
-import ru.xaori.intercomcall.data.service.SipForegroundService
+import org.pjsip.pjsua2.OnRegStateParam
+import org.pjsip.pjsua2.pjsip_status_code
 
 class MyAccount(
-    private val ep: Endpoint,
-    private val callController: CallController,
-    private val serviceContext: Context?
+    private val endpoint: Endpoint,
+    cfg: AccountConfig,
+    private val onIncomingCallCallback: (MyCall) -> Unit
 ) : Account() {
+    init {
+        create(cfg)
+    }
+
     override fun onIncomingCall(prm: OnIncomingCallParam) {
-        Log.d("SIP", "INVITE INVITE INVITE INVITE INVITE")
-        val call = MyCall(this, prm.callId, ep)
+        val call = MyCall(endpoint, this, prm.callId)
+        onIncomingCallCallback(call)
+    }
 
-        callController.setIncomingCall(call)
-
-        (serviceContext as SipForegroundService).showIncomingCallNotification()
+    override fun onRegState(prm: OnRegStateParam?) {
+        val active = prm?.code == pjsip_status_code.PJSIP_SC_OK
+        Log.d("PJSIP", "Регистрация: ${if (active) "успешна" else "неудачна"}")
     }
 }
