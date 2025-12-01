@@ -16,6 +16,9 @@
     <uses-permission android:name="android.permission.MANAGE_OWN_CALLS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+
 
 
     <application
@@ -41,16 +44,13 @@
         </activity>
         <activity
             android:name=".IncomingCallActivity"
-            android:exported="true"
-            android:showOnLockScreen="true"
-            android:showWhenLocked="true"
-            android:turnScreenOn="true" />
-
-        <service
-            android:name=".data.service.SipForegroundService"
             android:exported="false"
-            android:foregroundServiceType="phoneCall|microphone"
-            tools:ignore="ForegroundServicePermission" />
+            android:launchMode="singleTop"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
+            android:excludeFromRecents="true"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        </activity>
         <service
             android:name=".data.service.fcm.MyFirebaseMessagingService"
             android:exported="false">
@@ -59,18 +59,10 @@
             </intent-filter>
         </service>
         <service
-            android:name=".data.service.CallVibrationService"
+            android:name=".data.service.pjsip.SipService"
             android:exported="false"
-            android:foregroundServiceType="phoneCall" />
+            android:foregroundServiceType="mediaPlayback|phoneCall" />
 
-        <receiver
-            android:name=".data.service.fcm.CallActionReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="ACTION_ANSWER" />
-                <action android:name="ACTION_DECLINE" />
-            </intent-filter>
-        </receiver>
     </application>
 
 
