@@ -15,7 +15,6 @@ class MyCall(private val endpoint: Endpoint, acc: Account, callId: Int = -1) : C
 
     override fun onCallState(prm: OnCallStateParam?) {
         Log.d("PJSIP", "Состояние звонка: ${info.stateText}")
-        onStateChanged?.invoke(info.state)
     }
 
     override fun onCallMediaState(prm: OnCallMediaStateParam?) {

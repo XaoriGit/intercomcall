@@ -25,6 +25,9 @@ class SipService : Service() {
 
     val sipManager: SipManager by inject()
 
+    private var currentIncomingNotificationId: Int = 0
+
+
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate() {
         super.onCreate()
@@ -174,14 +177,18 @@ class SipService : Service() {
             .setFullScreenIntent(fullScreenPendingIntent, true)
             .build()
 
+        val id = System.currentTimeMillis().toInt()
+
+        currentIncomingNotificationId = id
+
         val manager = getSystemService(NotificationManager::class.java)
-        manager.notify(9999, notification)
+        manager.notify(id, notification)
 
         startActivity(fullScreenIntent)
     }
 
     private fun cancelIncomingCallNotification() {
         val nm = getSystemService(NotificationManager::class.java)
-        nm.cancel(9999)
+        nm.cancel(currentIncomingNotificationId)
     }
 }

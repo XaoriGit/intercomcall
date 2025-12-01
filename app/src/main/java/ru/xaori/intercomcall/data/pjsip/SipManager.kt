@@ -1,6 +1,5 @@
 package ru.xaori.intercomcall.data.pjsip
 
-import android.content.Context
 import android.util.Log
 import org.pjsip.pjsua2.AccountConfig
 import org.pjsip.pjsua2.AuthCredInfo
@@ -18,7 +17,7 @@ import org.pjsip.pjsua2.pjsip_transport_type_e
 import ru.xaori.intercomcall.presentation.state.CallUIState
 
 class SipManager(
-    private val appContext: Context, private val ep: Endpoint
+    private val ep: Endpoint
 ) {
     var currentCall: MyCall? = null
         private set
@@ -96,19 +95,20 @@ class SipManager(
     fun onIncomingCall(call: MyCall) {
         currentCall = call
 
-        call.onStateChanged = { state ->
-            when (state) {
-                pjsip_inv_state.PJSIP_INV_STATE_INCOMING -> onCallStateChanged?.invoke(CallUIState.Incoming)
-                pjsip_inv_state.PJSIP_INV_STATE_CONFIRMED,
-                pjsip_inv_state.PJSIP_INV_STATE_EARLY -> onCallStateChanged?.invoke(CallUIState.InCall)
-                pjsip_inv_state.PJSIP_INV_STATE_DISCONNECTED,
-                pjsip_inv_state.PJSIP_INV_STATE_NULL -> {
-                    currentCall = null
-                    onCallStateChanged?.invoke(CallUIState.Idle)
-                }
+
+
+        when (call.info.state) {
+            pjsip_inv_state.PJSIP_INV_STATE_INCOMING -> onCallStateChanged?.invoke(CallUIState.Incoming)
+            pjsip_inv_state.PJSIP_INV_STATE_CONFIRMED, pjsip_inv_state.PJSIP_INV_STATE_EARLY -> onCallStateChanged?.invoke(
+                CallUIState.InCall
+            )
+
+            pjsip_inv_state.PJSIP_INV_STATE_DISCONNECTED, pjsip_inv_state.PJSIP_INV_STATE_NULL -> {
+                currentCall = null
+                onCallStateChanged?.invoke(CallUIState.Idle)
             }
-            Log.d("CALL", state.toString())
         }
+        Log.d("CALL", call.info.stateText)
     }
 
     fun answerCall() {
